@@ -15,9 +15,6 @@ const database_1 = require("../database/database");
 class IdentificacionRoutes {
     constructor() {
         this.getId = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { password } = req.params;
-            const { user } = req.params;
-            setBD(true, user, password); // true BD Local; false BD Atlas
             yield database_1.db.conectarBD()
                 .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
                 console.log(mensaje);
@@ -35,21 +32,9 @@ class IdentificacionRoutes {
         return this._router;
     }
     misRutas() {
-        this._router.get('/:user&:password', this.getId);
+        this._router.get('/', this.getId);
     }
 }
-const setBD = (local, userAtlas, passAtlas) => __awaiter(void 0, void 0, void 0, function* () {
-    const bdLocal = 'proyecto';
-    const conexionLocal = `mongodb://localhost/${bdLocal}`;
-    if (local) {
-        database_1.db.cadenaConexion = conexionLocal;
-    }
-    else {
-        const bdAtlas = 'proyecto';
-        const conexionAtlas = `mongodb+srv://${userAtlas}:${passAtlas}@cluster0.gwsjm.mongodb.net/${bdAtlas}?retryWrites=true&w=majority`;
-        database_1.db.cadenaConexion = conexionAtlas;
-    }
-});
 const obj = new IdentificacionRoutes();
 obj.misRutas();
 exports.identificacionRoutes = obj.router;

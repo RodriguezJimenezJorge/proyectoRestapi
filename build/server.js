@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
-const alumnoRoutes_1 = require("./routes/alumnoRoutes");
+const institutoRoutes_1 = require("./routes/institutoRoutes");
 const identificacionRoutes_1 = require("./routes/identificacionRoutes");
 class Server {
     constructor() {
@@ -31,7 +31,7 @@ class Server {
         });
     }
     routes() {
-        this.app.use('/alumno', alumnoRoutes_1.alumnoRoutes);
+        this.app.use('/alumno', institutoRoutes_1.institutoRoutes);
         this.app.use('/id', identificacionRoutes_1.identificacionRoutes);
     }
     start() {

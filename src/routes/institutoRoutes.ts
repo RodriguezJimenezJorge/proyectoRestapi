@@ -71,7 +71,76 @@ class InstitutoRoutes {
                 const instituto = new Instituto(query._nombre, query._nAulas, query._nProfesores, 
                     query._nAlumnos, query._nCiclos)
                 console.log(instituto)
-                res.json({"nombre": instituto.nombre, "totalpersonas": instituto.totalpersonas()})
+                res.json({"nombre": instituto.nombre, "Total de personas: ": instituto.totalpersonas()})
+            }
+        })
+        .catch((mensaje) => {
+            res.send(mensaje)
+            console.log(mensaje)
+        })
+        db.desconectarBD()
+    }
+
+    private getAlumnosPorProfesor = async (req: Request, res: Response) => {
+        const { nombre } = req.params
+        await db.conectarBD()
+        .then( async (mensaje) => {
+            console.log(mensaje)
+            const query: any = await Institutos.findOne({_nombre: nombre})
+            if (query == null){
+                console.log(query)
+                res.json({})
+            }else{
+                const instituto = new Instituto(query._nombre, query._nAulas, query._nProfesores, 
+                    query._nAlumnos, query._nCiclos)
+                console.log(instituto)
+                res.json({"nombre": instituto.nombre, "Alumnos por cada profesor: ": instituto.alumporprofesor()})
+            }
+        })
+        .catch((mensaje) => {
+            res.send(mensaje)
+            console.log(mensaje)
+        })
+        db.desconectarBD()
+    }
+
+    private getProfesPorCiclo = async (req: Request, res: Response) => {
+        const { nombre } = req.params
+        await db.conectarBD()
+        .then( async (mensaje) => {
+            console.log(mensaje)
+            const query: any = await Institutos.findOne({_nombre: nombre})
+            if (query == null){
+                console.log(query)
+                res.json({})
+            }else{
+                const instituto = new Instituto(query._nombre, query._nAulas, query._nProfesores, 
+                    query._nAlumnos, query._nCiclos)
+                console.log(instituto)
+                res.json({"nombre": instituto.nombre, "Profesores por cada ciclo: ": instituto.profesporciclo()})
+            }
+        })
+        .catch((mensaje) => {
+            res.send(mensaje)
+            console.log(mensaje)
+        })
+        db.desconectarBD()
+    }
+
+    private getAulasUsadas = async (req: Request, res: Response) => {
+        const { nombre } = req.params
+        await db.conectarBD()
+        .then( async (mensaje) => {
+            console.log(mensaje)
+            const query: any = await Institutos.findOne({_nombre: nombre})
+            if (query == null){
+                console.log(query)
+                res.json({})
+            }else{
+                const instituto = new Instituto(query._nombre, query._nAulas, query._nProfesores, 
+                    query._nAlumnos, query._nCiclos)
+                console.log(instituto)
+                res.json({"nombre": instituto.nombre, "Aulas en uso: ": instituto.aulasusadas()})
             }
         })
         .catch((mensaje) => {
@@ -141,7 +210,10 @@ class InstitutoRoutes {
     misRutas(){
         this._router.get('/', this.getInstitutos)
         this._router.post('/nuevoI', this.nuevoInstitutoPost)
-        this._router.get('/areav2/:nombre', this.getTotalPersonas)
+        this._router.get('/totalpersonas/:nombre', this.getTotalPersonas)
+        this._router.get('/alumporprofesor/:nombre', this.getAlumnosPorProfesor)
+        this._router.get('/profesporciclo/:nombre', this.getProfesPorCiclo)
+        this._router.get('/aulasusadas/:nombre', this.getAulasUsadas)
         this._router.get('/borrar/:nombre', this.getDelete)
         this._router.post('/actualiza/:nombre', this.actualiza)
     }

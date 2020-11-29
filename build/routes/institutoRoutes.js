@@ -133,7 +133,7 @@ class InstitutoRoutes {
     misRutas() {
         this._router.get('/', this.getInstitutos);
         this._router.post('/nuevoI', this.nuevoInstitutoPost);
-        this._router.get('/areav2/:nombre', this.getTotalPersonas);
+        this._router.get('/totalpersonas/:nombre', this.getTotalPersonas);
         this._router.get('/borrar/:nombre', this.getDelete);
         this._router.post('/actualiza/:nombre', this.actualiza);
     }

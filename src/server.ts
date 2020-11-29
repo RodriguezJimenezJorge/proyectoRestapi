@@ -22,7 +22,7 @@ class Server {
     }
 
     private routes(){
-        this.app.use('/alumno', institutoRoutes)
+        this.app.use('/instituto', institutoRoutes)
         this.app.use('/id', identificacionRoutes)
     }
     start(){

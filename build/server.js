@@ -31,7 +31,7 @@ class Server {
         });
     }
     routes() {
-        this.app.use('/alumno', institutoRoutes_1.institutoRoutes);
+        this.app.use('/instituto', institutoRoutes_1.institutoRoutes);
         this.app.use('/id', identificacionRoutes_1.identificacionRoutes);
     }
     start() {

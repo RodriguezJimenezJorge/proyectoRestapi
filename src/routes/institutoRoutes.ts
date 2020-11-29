@@ -104,21 +104,6 @@ class InstitutoRoutes {
         db.desconectarBD()
     }
 
-    // private getAlumnosPorProfesor = async (req: Request, res: Response) =>{
-    //     const { nombre } = req.params
-    //     await db.conectarBD()
-    //     .then( async () =>{
-    //         const query: any = await Institutos.findOne({_nombre: nombre})
-    //         if (query == null){
-    //             res.json({})
-    //         }else{
-    //             const instituto: any = new Instituto(query._nombre, query._nAulas, query._nProfesores, query._nAlumnos, query._nCiclos)
-    //             res.json({"Nombre": instituto._nombre, "Alumnos por cada profesor: ": instituto.alumporprofesor()})
-    //         }
-    //     })
-    //     await db.desconectarBD()  
-    // }
-
     private getProfesPorCiclo = async (req: Request, res: Response) => {
         const { nombre } = req.params
         await db.conectarBD()
